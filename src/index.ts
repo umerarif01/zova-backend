@@ -26,7 +26,7 @@ const port = process.env.PORT! || 3000;
 // Middleware
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://zova.vercel.chat"],
+    origin: ["http://localhost:3000", "https://zova.vercel.app"],
     credentials: true,
   })
 );
