@@ -8,12 +8,16 @@ export async function insertKbSource(
   chatbotId: string,
   userId: string,
   name: string,
-  type: "pdf" | "url" | "docx" | "text" | "txt" | "csv",
+  type: "pdf" | "url" | "docx" | "text" | "txt" | "csv" | "img" | "pptx" | "yt",
   sourceKey: string,
   sourceUrl: string,
   content?: string
 ): Promise<string> {
-  if (!["pdf", "url", "docx", "text", "txt", "csv"].includes(type)) {
+  if (
+    !["pdf", "url", "docx", "text", "txt", "csv", "pptx", "img", "yt"].includes(
+      type
+    )
+  ) {
     throw new Error(`Unsupported file type: ${type}`);
   }
 
@@ -66,6 +70,24 @@ export async function insertKbSource(
         ...commonValues,
         sourceKey,
         sourceUrl: await getS3Url(sourceKey),
+      };
+    case "img":
+      insertValues = {
+        ...commonValues,
+        sourceKey,
+        sourceUrl: await getS3Url(sourceKey),
+      };
+    case "pptx":
+      insertValues = {
+        ...commonValues,
+        sourceKey,
+        sourceUrl: await getS3Url(sourceKey),
+      };
+    case "yt":
+      insertValues = {
+        ...commonValues,
+        sourceKey: content ?? sourceKey,
+        sourceUrl: content ?? sourceUrl,
       };
       break;
     default:

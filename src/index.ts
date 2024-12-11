@@ -14,9 +14,12 @@ import { loadDocxIntoPinecone } from "./utils/ingestion/docx-ingestion";
 import { loadTxtIntoPinecone } from "./utils/ingestion/txt-ingestion";
 import { loadCSVIntoPinecone } from "./utils/ingestion/csv-ingestion";
 import { loadTextIntoPinecone } from "./utils/ingestion/text-ingestion";
+import { loadPPTXIntoPinecone } from "./utils/ingestion/pptx-ingestion";
+import { loadImageIntoPinecone } from "./utils/ingestion/image-ingestion";
 import { kbSources } from "./drizzle/schema";
 import { db } from "./drizzle/db";
 import { config } from "dotenv";
+import { loadYoutubeIntoPinecone } from "./utils/ingestion/youtube-ingestion";
 
 config({ path: ".env" }); // or .env.local
 
@@ -70,8 +73,17 @@ app.post("/api/ingest-source", async (req: Request, res: Response) => {
       case "txt":
         processPromise = loadTxtIntoPinecone(file_key, chatbotId);
         break;
+      case "pptx":
+        processPromise = loadPPTXIntoPinecone(file_key, chatbotId);
+        break;
+      case "img":
+        processPromise = loadImageIntoPinecone(file_key, chatbotId);
+        break;
       case "csv":
         processPromise = loadCSVIntoPinecone(file_key, chatbotId);
+        break;
+      case "yt":
+        processPromise = loadYoutubeIntoPinecone(file_key, chatbotId);
         break;
       default:
         throw new Error("Unsupported file type");
