@@ -45,6 +45,8 @@ app.post("/api/ingest-source", async (req: Request, res: Response) => {
       return;
     }
 
+    console.log(file_key, file_name, chatbotId, type, content, userId);
+
     const sourceId = await insertKbSource(
       chatbotId,
       userId,

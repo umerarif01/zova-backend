@@ -52,12 +52,14 @@ export async function insertKbSource(
         sourceKey,
         sourceUrl: await getS3Url(sourceKey),
       };
+      break;
     case "docx":
       insertValues = {
         ...commonValues,
         sourceKey,
         sourceUrl: await getS3Url(sourceKey),
       };
+      break;
     case "text":
       insertValues = {
         ...commonValues,
@@ -71,18 +73,21 @@ export async function insertKbSource(
         sourceKey,
         sourceUrl: await getS3Url(sourceKey),
       };
+      break;
     case "img":
       insertValues = {
         ...commonValues,
         sourceKey,
         sourceUrl: await getS3Url(sourceKey),
       };
+      break;
     case "pptx":
       insertValues = {
         ...commonValues,
         sourceKey,
         sourceUrl: await getS3Url(sourceKey),
       };
+      break;
     case "yt":
       insertValues = {
         ...commonValues,
